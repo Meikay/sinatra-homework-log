@@ -14,7 +14,9 @@
 ActiveRecord::Schema.define(version: 20190901031233) do
 
   create_table "homework_assignments", force: :cascade do |t|
-    t.string   "content"
+    t.string   "subject"
+    t.string   "notes"
+    t.integer  "date"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
