@@ -12,8 +12,10 @@ class UsersController < ApplicationController
       # authenticates the user
       if @user.authenticate(params[:password])
         # logs the user in a session - goes into application_controller for enabling sessions
+        puts session
+        session[:user_id] = @user.id  
         # redirects to index/show page
-        binding.pry
+        redirect "users/#{@user.id}"
       else
         # tell user they entered incorrect username/password
         # redirect them to login
@@ -25,5 +27,11 @@ class UsersController < ApplicationController
     get '/signup' do
       erb :'/users/signup'
     end
+
+    #user's show route
+    get '/users/:id' do
+      "This will be my user show route!"
+    end
+
 
 end
