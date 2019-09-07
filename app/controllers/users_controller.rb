@@ -28,10 +28,29 @@ class UsersController < ApplicationController
       erb :'/users/signup'
     end
 
+    # create a new user and persist the
+    # new user to the DB
+    post '/users' do
+      if params[:username] != "" && params[:password] != ""
+        # valid input
+        @user = User.create(params)
+        redirect "users/#{@user.id}"
+      else
+        # not valid input
+      end
+    end
+
     #user's show route
     get '/users/:id' do
-      "This will be my user show route!"
+      @user = User.find_by(id: params[:id])
+      erb :'/users/show'
     end
+
+    get '/logout' do
+      session.clear
+      redirect '/'
+    end
+    
 
 
 end
