@@ -20,7 +20,18 @@ class HomeworkAssignmentsController < ApplicationController
       redirect '/homework_assignments/new'  
     end
   end
+
   # show route for a homework_assignment
+  get '/homework_assignments/:id' do
+    # Find homework assignment
+    @homework_assignment = HomeworkAssignment.find(params[:id])
+    erb :'/homework_assignments/show'
+  end
+
+  get '/homework_assignments/:id/edit' do
+    erb :'/homework_assignments/edit'
+  end
+
 
   # index route for all homework assignments
 end
