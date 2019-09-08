@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
 
-    def logged_in
+    def logged_in?
       # true if user is logged in, else false
       !!current_user
     end
