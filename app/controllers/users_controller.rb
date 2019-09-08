@@ -34,9 +34,12 @@ class UsersController < ApplicationController
       if params[:username] != "" && params[:password] != ""
         # valid input
         @user = User.create(params)
+        session[:user_id] = @user.id 
         redirect "users/#{@user.id}"
       else
         # not valid input
+        # include an error message telling them why
+        redirect '/signup'
       end
     end
 
@@ -50,7 +53,7 @@ class UsersController < ApplicationController
       session.clear
       redirect '/'
     end
-    
+
 
 
 end

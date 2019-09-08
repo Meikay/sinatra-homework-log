@@ -7,5 +7,6 @@ end
 # add a line of code here to send 'PATCH' and 'DELETE' requests
 use Rack::MethodOverride
 # mount controllers here with 'use'
+use HomeworkAssignmentsController
 use UsersController
 run ApplicationController
