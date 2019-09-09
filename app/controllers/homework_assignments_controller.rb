@@ -20,6 +20,7 @@ class HomeworkAssignmentsController < ApplicationController
     if params[:subject] != "" && params[:notes] != "" && params[:date] != ""
       # create new assignment
       @homework_assignment = HomeworkAssignment.create(subject: params[:subject], notes: params[:notes], date: params[:date], user_id: current_user.id)
+      binding.pry
       redirect "/homework_assignments/#{@homework_assignment.id}"
     else
       # throw an error for the user and tell them why
@@ -39,7 +40,7 @@ class HomeworkAssignmentsController < ApplicationController
   get '/homework_assignments/:id/edit' do
     find_assignment
     if logged_in?
-        if authorized_to_edit?(@homework_assignment)
+        if @homework_assignment.user == current_user
             erb :'/homework_assignments/edit'
         else
             redirect "users/#{current_user.id}"
