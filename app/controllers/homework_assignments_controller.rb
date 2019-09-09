@@ -1,7 +1,7 @@
 class HomeworkAssignmentsController < ApplicationController
   
   get '/homework_assignments' do
-    @homework_assigments = HomeworkAssignment.all
+    @homework_assignments = HomeworkAssignment.all
     erb :'/homework_assignments/index'    
   end
   
@@ -10,17 +10,16 @@ class HomeworkAssignmentsController < ApplicationController
     erb :'/homework_assignments/new'
   end
   # post homework_assignment to create new assignment
-  post '/homework_assigments' do
+  post '/homework_assignments' do
     # create assignment and save to DB only if
     # user is logged in
     if !logged_in?
-      redirect '/index'
+      redirect '/'
     end
     # save assignment only if it has content
     if params[:subject] != "" && params[:notes] != "" && params[:date] != ""
       # create new assignment
-      @homework_assignment = HomeworkAssignment.create(subject: params[:subject], notes: params[:notes], date: params[:date], user_id: current_user.id)
-      binding.pry
+      @homework_assignment = HomeworkAssignment.create(subject: params[:subject], notes: params[:notes], user_id: current_user.id)
       redirect "/homework_assignments/#{@homework_assignment.id}"
     else
       # throw an error for the user and tell them why
@@ -51,7 +50,7 @@ class HomeworkAssignmentsController < ApplicationController
   end
 
   # Finds hw assignment and update hw assignment and redirect to to show page
-  patch '/homework_assigments/:id' do
+  patch '/homework_assignments/:id' do
     find_assignment
     # allows someone to edit only if they are the current_user
     if logged_in? 
