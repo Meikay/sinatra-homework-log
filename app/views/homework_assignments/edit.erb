@@ -1,12 +1,11 @@
 <h2>Edit Homework Assignment: </h2>
 
-<form class="" action="/homework_assigments" method="post">
+<form class="" action="/homework_assigments/<%= @homework_assignment.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
     <label for="subject">Subject: </label>
-    <input type="text" name="subject" value="">
+    <input type="text" name="subject" value="<%= @homework_assignment.subject %>"><br><br>
     <label for="notes">Notes: </label>
-    <input type="text" name="notes" value="">
-    <label for="date">Date: </label>
-    <input type="text" name="date" value="">
+    <textarea name="notes" style="width:auto; height:auto;"><%= @homework_assignment.notes %></textarea><br><br>
 
-    <input type="submit" name="" value="Add New Assignment">
+    <input type="submit" name="" value="submit">
 </form>

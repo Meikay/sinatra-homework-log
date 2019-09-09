@@ -1,7 +1,10 @@
 <h1>show page for homework assignment</h1><br>
-<a href="/homework_assignments/<%= @homework_assignment.id %>/edit">Edit</a>
-<a href="/delete">Delete</a><br><br>
+
+<% if authorized_to_edit?(@homework_assignment) %>
+  <a href="/homework_assignments/<%= @homework_assignment.id %>/edit">Edit</a>
+  <a href="/delete">Delete</a>
+<% end %>
+<br><br>
 
 <p><%= @homework_assignment.subject %></p>
 <p><%= @homework_assignment.notes %></p>
-<p><%= @homework_assignment.date %></p>
