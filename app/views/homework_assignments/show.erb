@@ -1,6 +1,6 @@
 <h1>show page for homework assignment</h1><br>
 
-<% if @homework_assignment.user == current_user %>
+<% if authorized_to_edit?(@homework_assignment) %>
   <a href="/homework_assignments/<%= @homework_assignment.id %>/edit">Edit</a>
   <a href="/delete">Delete</a>
 <% end %>
