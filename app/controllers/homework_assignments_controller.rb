@@ -34,11 +34,11 @@ class HomeworkAssignmentsController < ApplicationController
     erb :'/homework_assignments/show'
   end
 
-  # PROBLEM - CAN EDIT OTHER USER'S DATA WITHOUT BEING LOGGED IN, PLEASE FIX!!!!!
   # Finds hw assignment and sends us to edit page
   get '/homework_assignments/:id/edit' do
     find_assignment
     if logged_in?
+        # if authorized_to_edit?(@homework_assignment) helper method doesnt work here
         if @homework_assignment.user == current_user
             erb :'/homework_assignments/edit'
         else
@@ -65,7 +65,17 @@ class HomeworkAssignmentsController < ApplicationController
     end
   end
 
-  # index route for all homework assignments
+  delete '/homework_assignments/:id' do
+    find_assignment
+    if @homework_assignment.user == current_user
+        #delete as
+        @homework_assignment.destroy
+        redirect '/homework_assignments'
+    else
+        #redirect
+        redirect '/homework_assignments'
+    end
+  end
 
 
   private

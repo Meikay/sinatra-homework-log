@@ -2,7 +2,11 @@
 
 <% if authorized_to_edit?(@homework_assignment) %>
   <a href="/homework_assignments/<%= @homework_assignment.id %>/edit">Edit</a>
-  <a href="/delete">Delete</a>
+  <br><br>
+  <form class="" action="/homework_assignments/<%= @homework_assignment.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" name="" value="Delete Assignment">
+  </form>
 <% end %>
 <br><br>
 
