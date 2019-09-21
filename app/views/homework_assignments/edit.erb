@@ -1,6 +1,6 @@
 <h2>Edit Homework Assignment: </h2>
 
-<form class="" action="/homework_assigments/<%= @homework_assignment.id %>" method="post">
+<form class="" action="/homework_assignments/<%= @homework_assignment.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
     <label for="subject">Subject: </label>
     <input type="text" name="subject" value="<%= @homework_assignment.subject %>"><br><br>

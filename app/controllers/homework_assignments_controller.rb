@@ -17,7 +17,7 @@ class HomeworkAssignmentsController < ApplicationController
       redirect '/'
     end
     # save assignment only if it has content
-    if params[:subject] != "" && params[:notes] != "" && params[:date] != ""
+    if params[:subject] != "" && params[:notes] != "" 
       # create new assignment
       @homework_assignment = HomeworkAssignment.create(subject: params[:subject], notes: params[:notes], user_id: current_user.id)
       redirect "/homework_assignments/#{@homework_assignment.id}"
@@ -54,8 +54,8 @@ class HomeworkAssignmentsController < ApplicationController
     find_assignment
     # allows someone to edit only if they are the current_user
     if logged_in? 
-      if @homework_assignment.user == current_user && params[:subject] != "" && params[:notes] != "" && params[:date] != ""
-      @homework_assignment.update(subject: params[:subject], notes: params[:notes], date: params[:date])
+      if @homework_assignment.user == current_user && params[:subject] != "" && params[:notes] != "" 
+      @homework_assignment.update(subject: params[:subject], notes: params[:notes])
       redirect "/homework_assignments/#{@homework_assignment.id}"
       else
         redirect "users/#{current_user.id}"
