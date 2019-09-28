@@ -31,12 +31,11 @@ class UsersController < ApplicationController
     # create a new user and persist the
     # new user to the DB
     post '/users' do
-      if params[:username] != "" && params[:password] != ""
-        # valid input
-        @user = User.create(params)
-        session[:user_id] = @user.id 
-        redirect "users/#{@user.id}"
-      else
+      @user = User.new(params)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect "/users/#{@user.id}"
+      else  
         # not valid input
         # include an error message telling them why
         redirect '/signup'
