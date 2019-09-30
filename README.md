@@ -1,4 +1,23 @@
+<h1>Sinatra-Homework-Log</h1>
+
+<h3>Description</h3>
 A simple homework log app that allows users to login, sign up and create homework assignment logs. Users can edit and delete their own homework assignments.
+
+<h3>Getting Started</h3>
+To run this app, clone the repo and run bundle install. The run shotgun to fire up a server. You should see the app running on localhost
+
+<h3>Prerequisites</h3>
+You will need to have Ruby installed on your machine - Linux or Mac.
+
+<h3>Built With...</h3>
+Sinatra - Sinatra, web framework
+sinatra-activerecord - ORM
+sqlite3 - Our SQL DB gem
+
+<h3>Author</h3>
+© 2019 by meikay
+
+
 
 LICENSE
 
