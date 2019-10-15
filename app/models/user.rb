@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
     validates :username, presence: true
     validates :username, uniqueness: true
 
-    has_many :homework_assignment
+    has_many :homework_assignments
 end

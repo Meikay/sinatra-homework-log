@@ -7,15 +7,15 @@ class HomeworkAssignmentsController < ApplicationController
   
     # get homework_assignments/new to render a form to create new assignment
   get '/homework_assignments/new' do
+    # redirect_if_not_logged_in
     erb :'/homework_assignments/new'
   end
+
   # post homework_assignment to create new assignment
   post '/homework_assignments' do
     # create assignment and save to DB only if
     # user is logged in
-    if !logged_in?
-      redirect '/'
-    end
+    redirect_if_not_logged_in
     # save assignment only if it has content
     if params[:subject] != "" && params[:notes] != "" 
       # create new assignment
@@ -37,35 +37,30 @@ class HomeworkAssignmentsController < ApplicationController
   # Finds hw assignment and sends us to edit page
   get '/homework_assignments/:id/edit' do
     find_assignment
-    if logged_in?
+    redirect_if_not_logged_in
         # if authorized_to_edit?(@homework_assignment) helper method doesnt work here
-        if @homework_assignment.user == current_user
+        if authorized_to_edit?(@homework_assignment)
             erb :'/homework_assignments/edit'
         else
             redirect "users/#{current_user.id}"
         end
-    else
-        redirect '/index'
-    end
   end
 
   # Finds hw assignment and update hw assignment and redirect to to show page
   patch '/homework_assignments/:id' do
     find_assignment
     # allows someone to edit only if they are the current_user
-    if logged_in? 
+    redirect_if_not_logged_in 
       if @homework_assignment.user == current_user && params[:subject] != "" && params[:notes] != "" 
       @homework_assignment.update(subject: params[:subject], notes: params[:notes])
       redirect "/homework_assignments/#{@homework_assignment.id}"
       else
         redirect "users/#{current_user.id}"
       end
-    else
-      redirect '/'  
-    end
   end
 
   delete '/homework_assignments/:id' do
+    redirect_if_not_logged_in
     find_assignment
     if @homework_assignment.user == current_user
         #delete as
@@ -81,7 +76,10 @@ class HomeworkAssignmentsController < ApplicationController
   private
 
   def find_assignment
-    @homework_assignment = HomeworkAssignment.find(params[:id])
+    @homework_assignment = HomeworkAssignment.find_by_id(params[:id])
+    if @homework_assignment == nil
+      redirect '/homework_assignments'
+    end
   end
 
 end

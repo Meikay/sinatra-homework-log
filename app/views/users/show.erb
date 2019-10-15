@@ -1,2 +1,9 @@
 <h2><%= @user.username%>'s Homework Log</h2>
 
+<% @homework_assignments.each do |homework_assignment| %>
+  <h4><a href="/homework_assignments/<%= homework_assignment.id %>"><%= homework_assignment.created_at %></a></h4>
+  <p><%= homework_assignment.subject %></p>
+  <p><%= homework_assignment.notes %></p>
+  <br><br>
+  <% end %>
+
