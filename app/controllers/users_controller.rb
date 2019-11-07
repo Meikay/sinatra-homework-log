@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       # finds the user,
       @user = User.find_by(username: params[:username])
       # authenticates the user
-      if @user && @user.authenticate(params[:password]) 
+      if @user && @user.authenticate(params[:password]) #.authenticate comes from the has_password macro
       # logs the user in a session - goes into application_controller for enabling sessions
         # puts session
         session[:user_id] = @user.id  
@@ -46,6 +46,7 @@ class UsersController < ApplicationController
     #user's show route
     get '/users/:id' do
       @user = User.find_by(id: params[:id])
+      # an array of hw assignments that this user^ has
       @homework_assignments = @user.homework_assignments 
       erb :'/users/show'
     end
